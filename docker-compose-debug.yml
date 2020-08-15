@@ -1,0 +1,11 @@
+version: '2'
+services:
+  db_debug:
+    image: postgres
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - 54321:5432
