@@ -48,3 +48,12 @@
 	height: 10px;
 	margin-right: 4px;
 }
+.main-element-1{
+	margin:21px 5px 21px 37px !important;
+	top:80px;
+}
+
+.main-element-2{
+	border:1px solid #dee2e6 !important;
+	background-color:#f7f7f9 !important;
+}

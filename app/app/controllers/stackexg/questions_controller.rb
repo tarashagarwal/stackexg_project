@@ -18,7 +18,7 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 		end
 
 		#calling qestions API
-		search_keyword 		 = "android"
+		search_keyword  = "android"
 		require 'open-uri'
 
 		get_latest_questions = "https://api.stackexchange.com/2.2/questions?page=1&pagesize=10&fromdate=1597449600&todate=1598054400&order=desc&sort=creation&tagged=#{search_keyword}&site=stackoverflow&auth_token=#{cookies[:stackexg_oauthtoken]}"
@@ -28,8 +28,8 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 		json_result["items"].each_with_index do |item,i|
 			questions << ([]<<item["title"])
 		end
-		@result = {}
-		@result["latest"] = questions
+		@results = {}
+		@results["Latest"] = questions
 
 
 		get_latest_questions = "https://api.stackexchange.com/2.2/questions?page=1&pagesize=10&fromdate=1597449600&todate=1598054400&order=desc&sort=votes&tagged=#{search_keyword}&site=stackoverflow&auth_token=#{cookies[:stackexg_oauthtoken]}"
@@ -37,12 +37,10 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 		json_result = JSON.parse(response)
 		questions = []
 		json_result["items"].each_with_index do |item,i|
-			questions << ([]<<item["title"])
+			questions << ([]<<(item["title"]))
 		end
-		
-		@result["voted"] = questions
 
-		debugger
+		@results["Voted"] = questions
 
 	end
 
