@@ -18,34 +18,40 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 		end
 
 		#calling qestions API
-		search_keyword  = "android"
-		search_keyword = search_keyword.capitalize
-		require 'open-uri'
-
-		get_latest_questions = "https://api.stackexchange.com/2.2/questions?page=1&pagesize=10&fromdate=1597449600&todate=1598054400&order=desc&sort=creation&tagged=#{search_keyword}&site=stackoverflow&auth_token=#{cookies[:stackexg_oauthtoken]}"
-		response = open(get_latest_questions).read
-		json_result = JSON.parse(response)
-		questions = []
-		json_result["items"].each_with_index do |item,i|
-			questions << ([]<<item["title"].capitalize)
-		end
+		search_keyword  = "android" 
 		@results = {}
-		@results["Latest #{search_keyword} Questions"] = questions
-
-
-		get_latest_questions = "https://api.stackexchange.com/2.2/questions?page=1&pagesize=10&fromdate=1597449600&todate=1598054400&order=desc&sort=votes&tagged=#{search_keyword}&site=stackoverflow&auth_token=#{cookies[:stackexg_oauthtoken]}"
-		response = open(get_latest_questions).read
-		json_result = JSON.parse(response)
-		questions = []
-		json_result["items"].each_with_index do |item,i|
-			questions << ([]<<(item["title"].capitalize))
-		end
-
-		@results["Most Voted #{search_keyword} Questions"] = questions
-
+		@results["Latest #{search_keyword} Questions"]     = get_questions_details search_keyword, "creation"
+		@results["Most Voted #{search_keyword} Questions"] = get_questions_details search_keyword, "votes"
+		debugger
 	end
 
 	def redirects
 		redirect_to "/get_questions"
+	end
+
+	private 
+	def get_questions_details search_keyword, sort
+		search_keyword = search_keyword.capitalize
+		require 'open-uri'
+		questions_query = "https://api.stackexchange.com/2.2/questions?page=1&pagesize=10&fromdate=1597449600&todate=1598054400&order=desc&sort=#{sort}&tagged=#{search_keyword}&site=stackoverflow&auth_token=#{cookies[:stackexg_oauthtoken]}"
+		debugger
+		response    = open(questions_query).read
+		json_result = JSON.parse(response)
+		questions   = []
+		json_result["items"].each_with_index do |item,i|
+			next if item["answers_count"] == 0
+			temp_item = []
+			temp_item << item["title"].capitalize
+			answers_query 	 = "https://api.stackexchange.com/2.2/questions/#{item["question_id"]}?order=desc&sort=activity&site=stackoverflow&filter=!E-PH4Kvk4lz6dx697PeHVXbH8._5NUJXUwyenL&auth_token=#{cookies[:stackexg_oauthtoken]}"
+			answers    		 = open(answers_query).read
+			answers_response = JSON.parse(answers)
+			answers = []
+			answers_response["items"].each_with_index do |item,i|
+				answers << item["body"]
+			end
+			temp_item << answers
+			questions << temp_item
+		end
+		return questions
 	end
 end
