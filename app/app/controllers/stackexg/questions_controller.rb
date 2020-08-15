@@ -21,7 +21,8 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 		end
 
 		#calling qestions API
-		search_keyword  = "android" 
+		search_keyword  = "android"
+		search_keyword = search_keyword.capitalize
 		@results = {}
 		@results["Latest #{search_keyword} Questions"]     = get_questions_details search_keyword, "creation", SIZE_LIMIT
 		@results["Most Voted #{search_keyword} Questions"] = get_questions_details search_keyword, "votes", SIZE_LIMIT
@@ -34,7 +35,7 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 
 	private 
 	def get_questions_details search_keyword, sort, size
-		search_keyword = search_keyword.capitalize
+
 		require 'open-uri'
 		questions_query = "https://api.stackexchange.com/2.2/questions?page=1&pagesize=#{size}&fromdate=1597449600&todate=1598054400&order=desc&sort=#{sort}&tagged=#{search_keyword}&site=stackoverflow&auth_token=#{cookies[:stackexg_oauthtoken]}"
 		response        = open(questions_query).read
@@ -52,7 +53,7 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 		questions_body    		 = open(questions_body_query).read
 		questions_body_response = JSON.parse(questions_body)
 		question_body_items     = questions_body_response["items"]
-		debugger
+
 		q_hash ={}
 
 		question_body_items.each_with_index do |q_item,i|
@@ -67,7 +68,7 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 		answers_body_response = JSON.parse(answers_body)
 		answer_body_items     = answers_body_response["items"]
 		a_hash = {}
-debugger
+
 		answer_body_items.each_with_index do |a_item,i|
 			if !a_item["body"].blank?
 				if a_hash[a_item["question_id"]].blank?
@@ -76,7 +77,7 @@ debugger
 				a_hash[a_item["question_id"]] << a_item["body"]
 			end
 		end
-debugger
+
 		question_ids.each_with_index do |id,i|
 			temp_arr = []
 			temp_arr << question_titles[i]
@@ -94,7 +95,6 @@ debugger
 
 			questions << temp_arr
 		end
-debugger
 
 
 		return questions
