@@ -24,7 +24,7 @@ if [ -f "/app/tmp/pids/server.pid" ]; then
 	rm -rf /app/tmp/pids/server.pid
 fi
 
-yarn && rails s -b 0.0.0.0 -p 3000
+yarn && rails s -b 0.0.0.0 -p 80
 
 # if [ $machine == "Mac" ]; then
 
