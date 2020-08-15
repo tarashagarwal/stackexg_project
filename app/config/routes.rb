@@ -5,12 +5,19 @@ Rails.application.routes.draw do
 	#
 	# We ask that you don't use the :as option here, as Solidus relies on it being the default of "spree"
 	# For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-	scope module: 'odrnow' do
+	# scope module: 'odrnow' do
+	# 	#resources :menu
+	# 	namespace :api do
+	# 		get 'get_menu' => 'menu#load_menu_for_resturant'
+	# 	end
+	# 	get 'get_menu' => 'menu#index' 
+	# end
+	scope module: 'stackexg' do
 		#resources :menu
 		namespace :api do
-			get 'get_menu' => 'menu#load_menu_for_resturant'
+			get 'get_questions' => 'questions#load_questions'
 		end
-		get 'get_menu' => 'menu#index' 
+		get 'get_questions' => 'questions#index'
 	end
 	
 	mount Spree::Core::Engine, at: '/'
