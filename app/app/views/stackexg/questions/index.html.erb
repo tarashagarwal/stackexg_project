@@ -19,17 +19,17 @@
       <div class="row">
         <div class="container main-element-1">
           <% @results.keys.each do |title| %>
-            <div class="row main-element-2">
+            <div class="row main-element-2 rounded">
               <h1 class = "title-header"> <%=title %> </h1>
-              <% @results[title].each_with_index do |question,i|%>
-                <div class="container">
+              <div class="container question-pocket">
+                <% @results[title].each_with_index do |question,i|%>
                   <div class="row main-element-3">
                     <ul class="list-group lg-1">
                       <li class="list-group-item li-1"><%=question[0]%></li>
                     </ul>
                   </div>
-                <div>
-              <%end%>
+                <%end%>
+              </div>
             </div>
           <%end%>
         </div>

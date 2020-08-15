@@ -56,7 +56,8 @@
 .main-element-2{
 	border:1px solid #dee2e6 !important;
 	background-color:#f7f7f9 !important;
-	margin: 2px 2px 2px 2px !important;
+	margin: 2px 2px 10px 2px !important;
+	padding: 13px 2px;
 }
 
 .main-element-3{
@@ -71,13 +72,18 @@
 
 .lg-1{
 	width: 100%;
+	font-weight: bold;
 }
 
 .li-1{
-	width: 80%;
-	margin-left: 5px;
+	width: 99%;
+	margin: 0 5px;
 }
 
 .title-header{
-	margin-left: 10px;
+	margin: 10px 20px;
+}
+
+.question-pocket{
+	padding: 0 5px !important;
 }
