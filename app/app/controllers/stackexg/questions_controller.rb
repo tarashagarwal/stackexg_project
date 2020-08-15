@@ -51,8 +51,8 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 
 		questions_body_query 	 = "https://api.stackexchange.com/2.2/questions/#{question_ids.join(";")}?order=desc&sort=#{sort}&site=stackoverflow&filter=!E-PH4Kvk4lz6dx697PeHVXbH8._5NUJXUwyenL&auth_token=#{cookies[:stackexg_oauthtoken]}"
 		questions_body    		 = open(questions_body_query).read
-		questions_body_response = JSON.parse(questions_body)
-		question_body_items     = questions_body_response["items"]
+		questions_body_response  = JSON.parse(questions_body)
+		question_body_items      = questions_body_response["items"]
 
 		q_hash ={}
 
@@ -63,8 +63,8 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 		end
 
 
-		answers_body_query 	 = "https://api.stackexchange.com/2.2/questions/#{question_ids.join(";")}/answers?order=desc&sort=#{sort}&site=stackoverflow&filter=!bM7*SVS)iE1yFX&auth_token=#{cookies[:stackexg_oauthtoken]}"
-		answers_body    		 = open(answers_body_query).read
+		answers_body_query 	  = "https://api.stackexchange.com/2.2/questions/#{question_ids.join(";")}/answers?order=desc&sort=#{sort}&site=stackoverflow&filter=!bM7*SVS)iE1yFX&auth_token=#{cookies[:stackexg_oauthtoken]}"
+		answers_body    	  = open(answers_body_query).read
 		answers_body_response = JSON.parse(answers_body)
 		answer_body_items     = answers_body_response["items"]
 		a_hash = {}
