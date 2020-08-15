@@ -26,7 +26,6 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 		@results = {}
 		@results["Latest #{search_keyword} Questions"]     = get_questions_details search_keyword, "creation", SIZE_LIMIT
 		@results["Most Voted #{search_keyword} Questions"] = get_questions_details search_keyword, "votes", SIZE_LIMIT
-		debugger
 	end
 
 	def redirects
