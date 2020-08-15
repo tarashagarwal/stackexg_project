@@ -56,4 +56,28 @@
 .main-element-2{
 	border:1px solid #dee2e6 !important;
 	background-color:#f7f7f9 !important;
+	margin: 2px 2px 2px 2px !important;
+}
+
+.main-element-3{
+	padding: 1px 1px 1px 1px !important;
+	margin: 1px 1px 1px 1px !important;
+}
+
+.main-element-3-para{
+	padding: 1px 1px 1px 1px !important;
+	margin: 1px 1px 1px 1px !important;
+}
+
+.lg-1{
+	width: 100%;
+}
+
+.li-1{
+	width: 80%;
+	margin-left: 5px;
+}
+
+.title-header{
+	margin-left: 10px;
 }

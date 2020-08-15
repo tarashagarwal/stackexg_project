@@ -29,7 +29,7 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 			questions << ([]<<item["title"])
 		end
 		@results = {}
-		@results["Latest"] = questions
+		@results["Latest #{search_keyword} Questions"] = questions
 
 
 		get_latest_questions = "https://api.stackexchange.com/2.2/questions?page=1&pagesize=10&fromdate=1597449600&todate=1598054400&order=desc&sort=votes&tagged=#{search_keyword}&site=stackoverflow&auth_token=#{cookies[:stackexg_oauthtoken]}"
@@ -37,10 +37,10 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 		json_result = JSON.parse(response)
 		questions = []
 		json_result["items"].each_with_index do |item,i|
-			questions << ([]<<(item["title"]))
+			questions << ([]<<(item["title"].capitalize))
 		end
 
-		@results["Voted"] = questions
+		@results["Most Voted #{search_keyword} Questions"] = questions
 
 	end
 
