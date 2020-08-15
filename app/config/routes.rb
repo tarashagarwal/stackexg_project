@@ -18,7 +18,8 @@ Rails.application.routes.draw do
 			get 'get_questions' => 'questions#load_questions'
 		end
 		get 'get_questions' => 'questions#index'
+		get '/' => 'questions#redirects'
 	end
 	
-	mount Spree::Core::Engine, at: '/'
+	#mount Spree::Core::Engine, at: '/'
 end
