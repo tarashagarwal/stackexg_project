@@ -27,15 +27,28 @@
                     <div class="card">
                       <div class="card-header" id="heading<%=i%>">
                         <h5 class="mb-0">
-                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse<%=i%>" aria-expanded="false" aria-controls="collapse<%=i%>">
+                          <button class="btn btn-light btn-block collapsed text-left" data-toggle="collapse" data-target="#collapse<%=i%>" aria-expanded="false" aria-controls="collapse<%=i%>">
                             <%=question[0]%>
                           </button>
                         </h5>
                       </div>
 
-                      <div id="collapse<%=i%>" class="collapse" aria-labelledby="heading<%=i%>" >
+                      <div id="collapse<%=i%>" class="collapse" aria-labelledby="heading<%=i%>">
                         <div class="card-body">
-                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                          <div class="main-element-3 rounded">
+                            <%=question[1].html_safe%>
+                          </div>
+                          <% if question[2].empty? %>
+                            <div class="main-element-4 rounded">
+                              No Answers Yet
+                            </div>
+                          <%else%>
+                            <% question[2].each do |ans| %>
+                            <div class="main-element-4 rounded">
+                              <%= ans.html_safe %>
+                            </div>
+                            <%end%>
+                          <%end%>
                         </div>
                       </div>
                     </div>
