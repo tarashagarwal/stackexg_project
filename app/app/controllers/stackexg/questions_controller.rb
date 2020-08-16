@@ -44,7 +44,7 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 	def get_questions_details search_keyword, sort, size
 
 		require 'open-uri'
-		questions_query = "https://api.stackexchange.com/2.2/questions?page=1&pagesize=#{size}&fromdate=1597449600&todate=1598054400&order=desc&sort=#{sort}&tagged=#{search_keyword}&site=stackoverflow&auth_token=#{cookies[:stackexg_oauthtoken]}"
+		questions_query = "https://api.stackexchange.com/2.2/questions?page=1&pagesize=#{size}&todate=#{Time.now.to_i}&fromdate=#{Time.now.days_ago(7).to_i}&order=desc&sort=#{sort}&tagged=#{search_keyword}&site=stackoverflow&auth_token=#{cookies[:stackexg_oauthtoken]}"
 
 		response        = open(questions_query)
 		response        = response.read 
