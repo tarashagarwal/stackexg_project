@@ -41,14 +41,19 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 
 		require 'open-uri'
 		questions_query = "https://api.stackexchange.com/2.2/questions?page=1&pagesize=#{size}&fromdate=1597449600&todate=1598054400&order=desc&sort=#{sort}&tagged=#{search_keyword}&site=stackoverflow&auth_token=#{cookies[:stackexg_oauthtoken]}"
-		response        = open(questions_query).read
+
+		response        = open(questions_query)
+		response        = response.read 
 		json_result     = JSON.parse(response)
 		questions       = []
 		question_ids    = []
 		question_titles = []
+		question_links  = []
+
 		json_result["items"].each_with_index do |item,i|
 			question_titles << item["title"].capitalize
 			question_ids    << item["question_id"]
+			question_links  << item["link"]
 		end
 
 
@@ -56,6 +61,7 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 		questions_body    		 = open(questions_body_query).read
 		questions_body_response  = JSON.parse(questions_body)
 		question_body_items      = questions_body_response["items"]
+
 
 		q_hash ={}
 
@@ -96,9 +102,10 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 				temp_arr << ""
 			end
 
+			temp_arr << question_links[i]
+
 			questions << temp_arr
 		end
-
 
 		return questions
 	end
