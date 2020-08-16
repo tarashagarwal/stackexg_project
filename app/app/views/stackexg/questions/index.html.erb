@@ -25,7 +25,7 @@
                   aria-label="Search">
               </div>
               <div class="col-3 col-md-1 align-2">
-                <button type="none" class="btn btn-warning btn-rounded w-100" onclick = "greeting(event)" >Go</button>
+                <button type="none" class="btn btn-warning btn-rounded w-100" onclick = "search(event)" >Go</button>
               </div>
             </div>
           </div>
@@ -82,7 +82,16 @@
       </div>
     </div>
     <script type="text/javascript">
-      function greeting(e){
+      var url = window.location.href;
+      search_string = url.split("?");
+      if(search_string.length > 1){
+        search_terms = search_string[1].split("=");
+        if(search_terms.length > 1 && search_terms[0] == "search")
+          document.getElementById("go").value = search_terms[1];
+      }
+    </script>
+    <script type="text/javascript">
+      function search(e){
         if(true){
           var term = document.getElementById("go").value;
           url = "/get_questions?search=" + term;
