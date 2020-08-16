@@ -6,26 +6,30 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 	SIZE_LIMIT = 10
 
 	def index
-		if params[:code].blank?
-			if cookies[:stackexg_oauthtoken].blank?
-				redirect_to "http://stackoverflow.com/oauth?client_id=18552&redirect_uri=http://#{DOMAIN}/get_questions&scope=no_expiry"
-			else
-				#Application is already registered
-			end
-		else
+		#debugger
+		# if params[:code].blank?
+		# 	if cookies[:stackexg_oauthtoken].blank?
+		# 		redirect_to "http://stackoverflow.com/oauth?client_id=18552&redirect_uri=http://#{DOMAIN}&scope=no_expiry"
+		# 	else
+		# 		#Application is already registered
+		# 	end
+		# else
 			cookies[:stackexg_oauthtoken] = {
-		       :value => params[:code],
+		       :value => "gqCntZi3tHOgk*1wC0KlcA))",
 		       :expires => 1.hour.from_now,
-		       :domain => DOMAIN
+		       :domain => DOMAIN,
+		       :samesite => "None"
 		    }
-		end
+		# end
 
 		#calling qestions API
-		search_keyword  = "android"
+		search_keyword = params[:search] || android
 		search_keyword = search_keyword.capitalize
+		
 		@results = {}
-		@results["Latest #{search_keyword} Questions"]     = get_questions_details search_keyword, "creation", SIZE_LIMIT
 		@results["Most Voted #{search_keyword} Questions"] = get_questions_details search_keyword, "votes", SIZE_LIMIT
+		@results["Latest #{search_keyword} Questions"]     = get_questions_details search_keyword, "creation", SIZE_LIMIT
+
 	end
 
 	def redirects

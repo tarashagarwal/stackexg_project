@@ -21,11 +21,11 @@
           <div class="container search-window mt-5">
             <div class="row align-1">
               <div class="col-9 col-md-11 align-1">
-                <input class="form-control form-control-sm mr-3 search-element" type="text" placeholder="Search For Tags"
+                <input class="form-control form-control-sm mr-3 search-element" id="go" type="text" placeholder="Search For Tags"
                   aria-label="Search">
               </div>
               <div class="col-3 col-md-1 align-2">
-                <button type="button" class="btn btn-warning btn-rounded w-100">Go</button>
+                <button type="none" class="btn btn-warning btn-rounded w-100" onclick = "greeting(event)" >Go</button>
               </div>
             </div>
           </div>
@@ -81,5 +81,14 @@
         </div>
       </div>
     </div>
+    <script type="text/javascript">
+      function greeting(e){
+        if(true){
+          var term = document.getElementById("go").value;
+          url = "/get_questions?search=" + term;
+          window.open(url);
+        }
+      }
+    </script>
   </body>
 </html>
