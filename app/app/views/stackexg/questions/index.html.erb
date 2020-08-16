@@ -11,19 +11,25 @@
 
     <div class="container-fluid">
 
-      <div class="row">
+      <div class="w-100">
         <%= render partial: 'spree/shared/header' %>
         <%= yield :templates %>
       </div>
 
-      <div class="row">
+      <div class="w-100">
+        <div class="container search-element mt-5">
+          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+        </div>
+      </div>
+
+      <div class="w-100">
         <div class="container main-element-1">
           <%i=1%>
           <% @results.keys.each do |title| %>
-            <div class="row main-element-2 rounded">
+            <div class="w-100 main-element-2 rounded">
               <h1 class = "title-header"> <%=title %> </h1>
               <div class="container question-pocket">
-                <div id="accordion">
+                <div class="acc-override" id="accordion">
                     <% @results[title].each do |question|%>
                       <div class="card">
                         <div class="card-header" id="heading<%=i%>">

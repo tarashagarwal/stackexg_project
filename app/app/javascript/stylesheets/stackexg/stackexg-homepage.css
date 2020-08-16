@@ -49,7 +49,12 @@
 	margin-right: 4px;
 }
 .main-element-1{
-	margin:21px 5px 21px 37px !important;
+	margin:0 13% !important;
+	top:80px;
+}
+
+.search-element{
+	 margin: 6rem 13% 16px 13% !important;
 	top:80px;
 }
 
@@ -95,4 +100,8 @@
 
 .question-pocket{
 	padding: 0 5px !important;
+}
+
+.acc-override{
+	width: 99%;
 }
