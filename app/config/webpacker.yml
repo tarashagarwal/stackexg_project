@@ -24,7 +24,7 @@ default: &default
     - .jpeg
     - .png
     - .gif
-    - .tiff
+    - .tiffy
     - .ico
     - .svg
     - .eot
