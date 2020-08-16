@@ -14,7 +14,19 @@ export POSTGRES_PORT=54321
 export DATABASE_NAME=cart_app
 export POSTGRES_HOST=localhost
 
-docker-compose down
+
+directoryArray=( pgdata/pg_wal/ pgdata/pg_tblspc/ pgdata/base pgdata/pg_replslot pgdata/pg_twophase pgdata/pg_stat_tmp pgdata/pg_stat pgdata/pg_snapshots pgdata/pg_xact pgdata/pg_commit_ts pgdata/pg_logical pgdata/pg_logical/snapshots pgdata/pg_logical/mappings )
+
+docker-compose down 
+
+for directoryPath in ${directoryArray[*]}
+do
+	if [ ! -d "${directoryPath}" ]; then
+  		mkdir "${directoryPath}"
+  		echo "Directory ${directoryPath} Created"
+  	fi
+done
+
 docker-compose -f docker-compose-debug.yml down
 yes | docker image prune
 docker-compose -f docker-compose-debug.yml up -d
