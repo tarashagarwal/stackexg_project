@@ -32,6 +32,10 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 
 	end
 
+	def healthcheck
+		render :json => "working" and return
+	end
+
 	def redirects
 		redirect_to "/get_questions"
 	end

@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 			get 'get_questions' => 'questions#load_questions'
 		end
 		get 'get_questions' => 'questions#index'
+		get 'healthcheck' => 'questions#healthcheck'
 		get '/' => 'questions#redirects'
 	end
 	
