@@ -23,9 +23,9 @@ class Stackexg::QuestionsController < Spree::Api::BaseController
 		# end
 
 		#calling qestions API
-		search_keyword = params[:search] || android
+		search_keyword = params[:search] || "android"
 		search_keyword = search_keyword.capitalize
-		
+
 		@results = {}
 		@results["Most Voted #{search_keyword} Questions"] = get_questions_details search_keyword, "votes", SIZE_LIMIT
 		@results["Latest #{search_keyword} Questions"]     = get_questions_details search_keyword, "creation", SIZE_LIMIT

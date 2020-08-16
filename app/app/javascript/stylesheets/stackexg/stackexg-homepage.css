@@ -13,6 +13,7 @@
 }
 .header-qr-col{
 	padding-left: 0;
+	margin-left: 32%;
 }
 .header-row{
  	margin: 0 !important;
@@ -54,7 +55,8 @@
 }
 
 .search-window{
-	margin: 6rem 13% 16px 13% !important;
+	margin-top: 6rem !important;
+	margin-bottom:75px !important;
 	top:80px;
 }
 
